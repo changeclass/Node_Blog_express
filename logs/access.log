@@ -1,0 +1,1 @@
+::ffff:127.0.0.1 - - [21/Oct/2020:14:26:19 +0000] "GET /api/blog/detail?id=1 HTTP/1.0" 304 - "http://127.0.0.1:8080/detail.html?id=1" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36"

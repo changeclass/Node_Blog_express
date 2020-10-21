@@ -1,6 +1,7 @@
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
+var fs = require("fs");
 // 用于处理 Cookie
 var cookieParser = require("cookie-parser");
 // 记录 access log
@@ -24,7 +25,27 @@ var app = express();
 // app.set("view engine", "jade");
 
 // 日志记录的级别
-app.use(logger("dev"));
+const ENV = process.env.NODE_ENV; // 当前运行的环境
+if (ENV !== "production") {
+  app.use(
+    // 开发环境 测试环境
+    logger("dev", {
+      stream: process.stdout,
+    })
+  );
+} else {
+  const logFileName = path.join(__dirname, "logs", "access.log");
+  const writeStream = fs.createWriteStream(logFileName, {
+    flags: "a",
+  });
+  app.use(
+    // 线上环境
+    logger("combined", {
+      stream: writeStream,
+    })
+  );
+}
+
 // 将数据转换为 JSON
 app.use(express.json());
 // 解析表单提交的数据
