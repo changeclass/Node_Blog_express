@@ -6,6 +6,9 @@ var cookieParser = require("cookie-parser");
 // 记录 access log
 var logger = require("morgan");
 
+// 处理session的插件
+const session = require("express-session");
+
 // 引用路由
 // var indexRouter = require("./routes/index");
 // var usersRouter = require("./routes/users");
@@ -28,6 +31,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // Cookie
 app.use(cookieParser());
+
+// 处理session
+app.use(
+  session({
+    secret: "asdjhkkask", // 加密的密匙
+    cookie: {
+      path: "/", // 默认配置-路径
+      httpOnly: true, // 默认配置-不允许客户端修改
+      maxAge: 24 * 60 * 60 * 1000, // 生效时间
+    },
+  })
+);
+
 // 设置静态目录
 // app.use(express.static(path.join(__dirname, "public")));
 
