@@ -15,3 +15,8 @@ function genPassword(password) {
   console.log(`传入字符：${password} 加密结果：${md5(str)}`);
   return md5(str);
 }
+
+module.exports = {
+  genPassword,
+  md5,
+};

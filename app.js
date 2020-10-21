@@ -6,12 +6,9 @@ var cookieParser = require("cookie-parser");
 // 记录 access log
 var logger = require("morgan");
 
-<<<<<<< HEAD
 // 处理session的插件
 const session = require("express-session");
-
-=======
->>>>>>> c047106... 🎉 初始化项目
+const RedisStore = require("connect-redis")(session);
 // 引用路由
 // var indexRouter = require("./routes/index");
 // var usersRouter = require("./routes/users");
@@ -35,6 +32,10 @@ app.use(express.urlencoded({ extended: false }));
 // Cookie
 app.use(cookieParser());
 
+const redisClient = require("./db/redis");
+const sessionStroe = new RedisStore({
+  client: redisClient,
+});
 // 处理session
 app.use(
   session({
@@ -44,6 +45,7 @@ app.use(
       httpOnly: true, // 默认配置-不允许客户端修改
       maxAge: 24 * 60 * 60 * 1000, // 生效时间
     },
+    store: sessionStroe,
   })
 );
 
