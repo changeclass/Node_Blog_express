@@ -6,9 +6,12 @@ var cookieParser = require("cookie-parser");
 // 记录 access log
 var logger = require("morgan");
 
+<<<<<<< HEAD
 // 处理session的插件
 const session = require("express-session");
 
+=======
+>>>>>>> c047106... 🎉 初始化项目
 // 引用路由
 // var indexRouter = require("./routes/index");
 // var usersRouter = require("./routes/users");
